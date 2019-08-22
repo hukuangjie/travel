@@ -8,7 +8,7 @@
       输入城市景点/游玩主题
     </div>
     <div class="header-right">
-      城市
+      {{this.city}}
       <span class="iconfont arrow-icon">&#xe64a;</span>
     </div>
   </div>
@@ -16,11 +16,15 @@
 
 <script>
 export default {
-  name: "HomeHeader"
+  name: "HomeHeader",
+  props: {
+    city: String
+  }
 };
 </script>
 <style lang="stylus" scoped>
-@import '~@/assets/styles/varibles.styl'
+@import '~@/assets/styles/varibles.styl';
+
 .header {
   display: flex;
   height: 0.86rem;
@@ -34,7 +38,7 @@ export default {
 
     .back-icon {
       font-size: 0.4rem;
-      padding-left .2rem;
+      padding-left: 0.2rem;
     }
   }
 
@@ -43,7 +47,7 @@ export default {
     height: 0.64rem;
     line-height: 0.64rem;
     margin-left: 0.2rem;
-    padding-left .2rem
+    padding-left: 0.2rem;
     background: #fff;
     border-radius: 0.1rem;
     color: #CCC;
@@ -53,9 +57,10 @@ export default {
     width: 1.24rem;
     float: right;
     text-align: center;
+
     .arrow-icon {
-      margin-left -.04rem
-      font-size .24rem
+      margin-left: -0.04rem;
+      font-size: 0.24rem;
     }
   }
 }
