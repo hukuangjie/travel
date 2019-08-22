@@ -2,7 +2,7 @@
   <div class="wrapper">
     <swiper :options="swiperOption">
       <!-- slides -->
-      <swiper-slide v-for="item of swiperList" key="item.id">
+      <swiper-slide v-for="item of swiperList" :key="item.id">
         <img
           class="swiper-img"
           :src="item.imgUrl"
@@ -30,7 +30,7 @@ export default {
         {
           id: "0002",
           imgUrl: "http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20193/87a224d0349d94a11e97f31aa1aba4f5.jpg_750x200_1f78af87.jpg"
-        }
+        },
       ]
     };
   }
