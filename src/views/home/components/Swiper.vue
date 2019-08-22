@@ -8,6 +8,7 @@
           :src="item.imgUrl"
         />
       </swiper-slide>
+      <!-- 插槽 -->
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
   </div>
