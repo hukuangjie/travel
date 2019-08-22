@@ -134,7 +134,7 @@ export default {
     line-height: 0.44rem;
     text-align: center;
     color: $darkTextColor;
-    ellipsis()
+    ellipsis();
   }
 }
 </style>
