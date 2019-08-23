@@ -13,6 +13,7 @@
           class="search-item border-bottom"
           v-for="item of list"
           :key="item.id"
+          @click="handleCityClick(item.name)"
         >
         {{item.name}}
         </li>
@@ -30,13 +31,23 @@
 <script>
 import BScroll from 'better-scroll'
 import { clearTimeout, setTimeout } from 'timers';
+import {mapMutations} from 'vuex'
 export default {
   name: "CitySearch",
   props: {
     cities: Object
   },
   mounted () {
-      this.scroll = new BScroll(this.$refs.search)
+      this.scroll = new BScroll(this.$refs.search, { mouseWheel: true, click: true, tap: true })
+  },
+  methods: {
+    handleCityClick (city) {
+        // this.$store.commit('changeCity', city)
+        // 使用了mapMutations 就可以省略上面的代码，简化为下面的代码
+        this.changeCity(city)
+        this.$router.push('/')
+    },
+    ...mapMutations(['changeCity'])
   },
   data () {
     return {

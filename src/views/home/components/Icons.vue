@@ -21,7 +21,9 @@ export default {
   },
   data() {
     return {
-      swiperOption: false
+      swiperOption: {
+        autoplay: false
+      }
     };
   },
   computed: {

@@ -6,7 +6,7 @@
             <div class="button-list">
                 <div class="button-wrapper">
                     <div class="button">
-                        北京
+                        {{this.currentCity}}
                     </div>
                 </div>
             </div>
@@ -14,7 +14,12 @@
         <div class="area">
             <div class="title border-topbottom">热门城市</div>
             <div class="button-list">
-                <div class="button-wrapper" v-for="item of hot" :key="item.id">
+                <div
+                    class="button-wrapper"
+                    v-for="item of hot"
+                    :key="item.id"
+                    @click="handleCityClick(item.name)"
+                >
                     <div class="button">
                         {{item.name}}
                     </div>
@@ -30,28 +35,41 @@
         >
             <div class="title border-topbottom">{{key}}</div>
             <div class="item-list">
-                <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">{{innerItem.name}}</div>
+                <div
+                    class="item border-bottom"
+                    v-for="innerItem of item"
+                    :key="innerItem.id"
+                    @click="handleCityClick(innerItem.name)"
+                >{{innerItem.name}}</div>
             </div>
         </div>
     </div>
         </div>
-        
 </template>
 
 <script>
 import BScroll from 'better-scroll'
+import { mapState,mapMutations } from 'vuex'
 export default {
     name:'CityList',
+    computed: {
+        ...mapState({
+            currentCity: 'city'
+        })
+    },
     props: {
         cities: Object,
         hot: Array,
         letter: String
     },
-    mounted () {
-        // let scroll = new BScroll(this.$refs.wrapper) 
-        // 原来写成了let，然后下面watch中无法获取scroll了，改成下面的即可。
-        this.scroll = new BScroll(this.$refs.wrapper)
-
+    methods: {
+        handleCityClick (city) {
+            // this.$store.dispatch('changeCity', city)
+            // 使用了mapMutations 就可以省略上面的代码，简化为下面的代码
+            this.changeCity(city)
+            this.$router.push('/')
+        },
+        ...mapMutations(['changeCity'])
     },
     watch: {
         letter () {
@@ -60,7 +78,12 @@ export default {
                 this.scroll.scrollToElement(element)
             }
         }
-    }
+    },
+    mounted () {
+        // let scroll = new BScroll(this.$refs.wrapper) 
+        // 原来写成了let，然后下面watch中无法获取scroll了，改成下面的即可。
+        this.scroll = new BScroll(this.$refs.wrapper, { mouseWheel: true, click: true, tap: true })
+    },
 }
 </script>
 
