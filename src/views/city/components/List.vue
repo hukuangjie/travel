@@ -22,7 +22,12 @@
 
             </div>
         </div>
-        <div class="area" v-for="(item,key) of cities" :key="key">
+        <div
+            class="area"
+            v-for="(item,key) of cities"
+            :key="key"
+            :ref="key"
+        >
             <div class="title border-topbottom">{{key}}</div>
             <div class="item-list">
                 <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">{{innerItem.name}}</div>
@@ -39,10 +44,22 @@ export default {
     name:'CityList',
     props: {
         cities: Object,
-        hot: Array
+        hot: Array,
+        letter: String
     },
     mounted () {
-        let scroll = new BScroll(this.$refs.wrapper)
+        // let scroll = new BScroll(this.$refs.wrapper) 
+        // 原来写成了let，然后下面watch中无法获取scroll了，改成下面的即可。
+        this.scroll = new BScroll(this.$refs.wrapper)
+
+    },
+    watch: {
+        letter () {
+            if (this.letter) {
+                const element = this.$refs[this.letter][0]
+                this.scroll.scrollToElement(element)
+            }
+        }
     }
 }
 </script>
