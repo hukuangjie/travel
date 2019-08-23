@@ -25,5 +25,9 @@ export default new Router({
       name: 'Detail',
       component: Detail
     },
-  ]
+  ],
+  // 页面滚动会影响全局的，父组件滚动页面后，子组件也会滚动
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
